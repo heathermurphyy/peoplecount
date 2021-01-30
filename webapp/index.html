@@ -1,0 +1,42 @@
+<!-- to open from terminal: open webapp/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People Counter</title>
+</head>
+<body>
+    <h2>Bus Occupancy</h2>
+    <h4 id="occupancy">loading</h4>
+
+</body>
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-database.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyC4GwvttlxOfCIylPtppPzLzCebfwkDYhE",
+      authDomain: "countus-c2321.firebaseapp.com",
+      databaseURL: "https://countus-c2321-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "countus-c2321",
+      storageBucket: "countus-c2321.appspot.com",
+      messagingSenderId: "888497547358",
+      appId: "1:888497547358:web:f7a0aeb658e9b5336e6ccf"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    var database = firebase.database();
+
+firebase.database().ref('/people_count').on("value",(snapshot) => {
+  var count = (snapshot.val() && snapshot.val().count) || 'offline';
+  document.getElementById("occupancy").innerHTML=count
+});
+
+
+  </script>
+
+</html>
