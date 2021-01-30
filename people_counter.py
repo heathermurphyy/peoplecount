@@ -5,9 +5,9 @@
 #	--output output/output_01.avi
 #
 # To read from webcam and write back out to disk:
-#python people_counter.py --prototxt mobilenet_ssd/MobileNetSSD_deploy.prototxt \
-#   --model mobilenet_ssd/MobileNetSSD_deploy.caffemodel \
-#  --output output/webcam_output.avi
+# python people_counter.py --prototxt mobilenet_ssd/MobileNetSSD_deploy.prototxt \
+#    --model mobilenet_ssd/MobileNetSSD_deploy.caffemodel \
+#   --output output/webcam_output.avi
 
 # import the necessary packages
 from pyimagesearch.centroidtracker import CentroidTracker
@@ -20,6 +20,14 @@ import imutils
 import time
 import dlib
 import cv2
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import db
+
+cred = credentials.Certificate("/Users/heathermurphy/Desktop/Firebase_credentials.json")
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://countus-c2321-default-rtdb.europe-west1.firebasedatabase.app/'
+})
 
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
@@ -47,6 +55,15 @@ CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
 # load our serialized model from disk
 print("[INFO] loading model...")
 net = cv2.dnn.readNetFromCaffe(args["prototxt"], args["model"])
+
+# DATABASE STUFF 
+ref = db.reference('/people_count')
+
+def updateCount(count):
+	print(count)
+	ref.set({
+		'count':count
+	})
 
 # if a video path was not supplied, grab a reference to the webcam
 if not args.get("input", False):
@@ -79,6 +96,7 @@ trackableObjects = {}
 totalFrames = 0
 totalDown = 0
 totalUp = 0
+people = 0
 
 # start the frames per second throughput estimator
 fps = FPS().start()
@@ -231,6 +249,9 @@ while True:
 				elif direction > 0 and centroid[1] > H // 2:
 					totalDown += 1
 					to.counted = True
+
+				people = totalDown - totalUp
+				updateCount (people)				
 
 		# store the trackable object in our dictionary
 		trackableObjects[objectID] = to
