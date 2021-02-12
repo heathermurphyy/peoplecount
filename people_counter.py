@@ -4,12 +4,12 @@
 # 	--model mobilenet_ssd/MobileNetSSD_deploy.caffemodel --input videos/example_01.mp4 \
 # 	--output output/output_01.avi
 #
-# To read from webcam and write back out to disk:
+# To read from webcam and write back out:
 # python people_counter.py --prototxt mobilenet_ssd/MobileNetSSD_deploy.prototxt \
 #    --model mobilenet_ssd/MobileNetSSD_deploy.caffemodel \
 #   --output output/webcam_output.avi
 
-# import the necessary packages
+# import packages
 from pyimagesearch.centroidtracker import CentroidTracker
 from pyimagesearch.trackableobject import TrackableObject
 from imutils.video import VideoStream
@@ -24,6 +24,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 
+#firebase creds read in and link
 cred = credentials.Certificate("/Users/heathermurphy/Desktop/Firebase_credentials.json")
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://countus-c2321-default-rtdb.europe-west1.firebasedatabase.app/'
@@ -52,11 +53,11 @@ CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
 	"dog", "horse", "motorbike", "person", "pottedplant", "sheep",
 	"sofa", "train", "tvmonitor"]
 
-# load our serialized model from disk
+# load the serialized model from disk
 print("[INFO] loading model...")
 net = cv2.dnn.readNetFromCaffe(args["prototxt"], args["model"])
 
-# DATABASE STUFF 
+# Firebase ops
 ref = db.reference('/people_count')
 
 def updateCount(count):
@@ -76,23 +77,19 @@ else:
 	print("[INFO] opening video file...")
 	vs = cv2.VideoCapture(args["input"])
 
-# initialize the video writer (we'll instantiate later if need be)
+# initialize the video writer & Frame dimensions
 writer = None
-
-# initialize the frame dimensions (we'll set them as soon as we read
-# the first frame from the video)
 W = None
 H = None
 
-# instantiate our centroid tracker, then initialize a list to store
-# each of our dlib correlation trackers, followed by a dictionary to
-# map each unique object ID to a TrackableObject
+# instantiate centroid tracker,
 ct = CentroidTracker(maxDisappeared=40, maxDistance=50)
+#list to store each of the trackers
 trackers = []
+#keep list/dictionary to map object ID's to TrackableObject
 trackableObjects = {}
 
-# initialize the total number of frames processed thus far, along
-# with the total number of objects that have moved either up or down
+# initialize the total number of frames processed, objects moved up/down and occupancy count
 totalFrames = 0
 totalDown = 0
 totalUp = 0
@@ -103,13 +100,11 @@ fps = FPS().start()
 
 # loop over frames from the video stream
 while True:
-	# grab the next frame and handle if we are reading from either
-	# VideoCapture or VideoStream
+	# grab the next frame, and deal with it
 	frame = vs.read()
 	frame = frame[1] if args.get("input", False) else frame
 
-	# if we are viewing a video and we did not grab a frame then we
-	# have reached the end of the video
+	# if using video sample,did not grab a frame -> at end of vid and break the while loop
 	if args["input"] is not None and frame is None:
 		break
 
@@ -123,51 +118,46 @@ while True:
 	if W is None or H is None:
 		(H, W) = frame.shape[:2]
 
-	# if we are supposed to be writing a video to disk, initialize
-	# the writer
+	# if we are supposed to be writing a video to disk, initialize the writer
 	if args["output"] is not None and writer is None:
 		fourcc = cv2.VideoWriter_fourcc(*"MJPG")
 		writer = cv2.VideoWriter(args["output"], fourcc, 30,
 			(W, H), True)
 
-	# initialize the current status along with our list of bounding
+	# initialize the current status along with list of bounding
 	# box rectangles returned by either (1) our object detector or
 	# (2) the correlation trackers
 	status = "Waiting"
 	rects = []
 
 	# check to see if we should run a more computationally expensive
-	# object detection method to aid our tracker
+	# object detection
 	if totalFrames % args["skip_frames"] == 0:
 		# set the status and initialize our new set of object trackers
 		status = "Detecting"
 		trackers = []
 
 		# convert the frame to a blob and pass the blob through the
-		# network and obtain the detections
+		# cv network and obtain the detections
 		blob = cv2.dnn.blobFromImage(frame, 0.007843, (W, H), 127.5)
 		net.setInput(blob)
 		detections = net.forward()
 
 		# loop over the detections
 		for i in np.arange(0, detections.shape[2]):
-			# extract the confidence (i.e., probability) associated
-			# with the prediction
+			# extract the confidence associated with the prediction
 			confidence = detections[0, 0, i, 2]
 
-			# filter out weak detections by requiring a minimum
-			# confidence
+			# filter out weak detections by requiring a minimum confidence
 			if confidence > args["confidence"]:
-				# extract the index of the class label from the
-				# detections list
+				# extract the index of the class label from the detections list
 				idx = int(detections[0, 0, i, 1])
 
-				# if the class label is not a person, ignore it
+				# if the class label is not a person, ignore it and skip
 				if CLASSES[idx] != "person":
 					continue
 
-				# compute the (x, y)-coordinates of the bounding box
-				# for the object
+				# compute the (x, y)-coordinates of the bounding box for the person
 				box = detections[0, 0, i, 3:7] * np.array([W, H, W, H])
 				(startX, startY, endX, endY) = box.astype("int")
 
