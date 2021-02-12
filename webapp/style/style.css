@@ -1,0 +1,36 @@
+#body{
+    background-color: white;
+    color: #555;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 16px;
+    line-height: 1.6em;
+    margin: 0px;
+}
+
+#underTitle{
+    color:rgba(10, 10, 10, 0.39);
+    padding: 0px;
+    margin: 0px;
+}
+#main-footer{
+    background: rgba(151, 170, 189, 0.746);
+    color: rgba(240, 248, 255, 0.568);
+    text-align: center;
+    padding: 0px;
+    margin-top:200px;
+}
+
+tr:nth-child(odd) {
+    background-color: #000baa;
+    color: aliceblue
+  }
+
+#stopNum{
+    text-align: left;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 5px;
+    margin: 5px 5px 0px 5px;
+
+}
+
