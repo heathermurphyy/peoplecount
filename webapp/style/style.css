@@ -1,5 +1,5 @@
 #body{
-    background-color: rgb(241, 248, 246);
+    background-color: whitesmoke;
     /* background-image: radial-gradient(rgb(233, 241, 239),);     */
     color: black;
     text-align: center;
@@ -42,6 +42,7 @@ header{
 }
 
 #table{
+    background-color: rgb(241, 248, 246);
     padding-top: 5%;
 }
 
