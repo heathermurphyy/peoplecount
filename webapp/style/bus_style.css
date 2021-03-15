@@ -1,0 +1,84 @@
+body{
+    margin: 5% 5% 0% 5%;
+}
+
+#main{
+    height: 917.8px;
+    width: 700px;
+   
+}
+
+.occupancy_img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 30px;
+    width:70%;
+ }
+
+ #bus_front_header{
+     height: 150px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;
+    font-stretch: wider;
+     align-content: center;
+     display: flex;
+     align-items: center;
+     flex-direction: row;
+     margin: 0%;
+     padding: 0%;
+     text-align: center;
+     font-size: 200%;
+}
+
+#bus_num{
+    font-size: 250%;
+}
+
+.icon{
+    position: relative;
+    width: 20%;
+}
+
+ #BUS_h1{
+     font-size: 50px;
+     padding: 0%;
+ }
+
+
+#occupancy{
+    padding: 0%;
+    margin: 0%;
+    font-size: 280%;
+}
+
+#BUS_occupancy_block{
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    margin: 0% 40% 0% 40%;
+    padding: 0%;
+    font-size: 300%;
+}
+
+#logo{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin: 0%;
+    padding: 0%;
+}
+
+
+#main-footer{
+    margin: 0%;
+    background: rgba(151, 170, 189, 0.746);
+    color: rgba(0, 0, 0, 0.568);
+    text-align: center;
+    padding: 0px;
+  
+}
+
+
+
+

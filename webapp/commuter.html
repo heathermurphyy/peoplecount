@@ -10,11 +10,25 @@
 
 
 <body id="body">
-    <h2>Your Bus Occupancy</h2>
-    <h5 id="underTitle">Group 7 - 3B8 - Trinity College Dublin</h5>
+
+  <header>
+    <div class="row">
+      <div class="column"> 
+        <img src="style/LOGO/DublinBus_Logo.png" width="60%">
+      </div>
+
+      <div class="column">
+        <img src="style/LOGO/Gradient Logo on Transparent/default.png" width="60%" >
+      </div>
+    </div>
+
+    <h2 id="title">LIVE CAPACITY INFO</h2>
+  </header>
+
 
     <h4 id="stopNum"> STOP: 
-      <input type="number" name="stop" id="stopNum" value="1562"> 
+      <input type="number" name="stop" id="stopNum" value="1562">
+      <input type="button" value="GO" onclick="history.go(0)" id="submit_bus"> 
     </h4> 
     
 
@@ -31,15 +45,17 @@
         <td>7 mins</td>
         <td id="occupancy"> loading </td>
       </tr>
+
+
     </table>
     <!-- <h4 id="occupancy">loading</h4> -->
 
 
 
 
-
+    
     <footer id="main-footer">
-        <p>Copyright &copy; Jan 2021 heathermurphyy.git</p>
+        <p>Copyright &copy; March 2021 Occulus</p>
     </footer>
 
 
@@ -55,7 +71,7 @@
 
 
   <script>
-    // Your web app's Firebase configuration
+    // web app's Firebase configuration
     var firebaseConfig = {
       apiKey: "AIzaSyC4GwvttlxOfCIylPtppPzLzCebfwkDYhE",
       authDomain: "countus-c2321.firebaseapp.com",

@@ -1,6 +1,7 @@
 #body{
-    background-color: white;
-    color: #555;
+    background-color: rgb(241, 248, 246);
+    /* background-image: radial-gradient(rgb(233, 241, 239),);     */
+    color: black;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 16px;
@@ -8,18 +9,42 @@
     margin: 0px;
 }
 
-#underTitle{
-    color:rgba(10, 10, 10, 0.39);
-    padding: 0px;
-    margin: 0px;
+header{
+    display: block;
+    /* align-items: center;
+    flex-direction: row; */
+    margin: 0%;
+    padding: 2.5% 0% 0% 0%;
 }
+
+.row{
+    display: flex;
+    padding: 0%;
+    margin: 0%; 
+}
+.column{
+    flex: 50%;
+}
+
+#title{
+    background-color: darkcyan;
+    background-image: linear-gradient(darkcyan, white);
+    margin: 0%;
+    padding: 1%;
+}
+
 #main-footer{
     background: rgba(151, 170, 189, 0.746);
     color: rgba(240, 248, 255, 0.568);
     text-align: center;
     padding: 0px;
-    margin-top:200px;
+    margin-top:425px;
 }
+
+#table{
+    padding-top: 5%;
+}
+
 
 tr:nth-child(odd) {
     background-color: #000baa;
@@ -34,3 +59,13 @@ tr:nth-child(odd) {
 
 }
 
+#submit_bus{
+    background-color: darkcyan;
+    background-image: linear-gradient(darkcyan, white);
+    cursor: pointer;
+    border-radius: 70px;
+    width: 15%;
+    font-weight: bold;
+
+
+}

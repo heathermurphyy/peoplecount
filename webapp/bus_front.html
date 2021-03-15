@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/bus_style.css">
+    <title>Occulus - BusView</title>
+
+</head>
+<body>
+    <div id="main">
+
+
+       
+        <header id="bus_front_header">
+            <img class="icon" src="style/bus_icon.svg"></img>
+            <h1 id="bus_num"> 42 </h1> <h2>PORTMARNOCK via SEABURY </h2>
+        </header>
+        
+        <!-- <div id="BUS_occupancy_block">
+            <table>
+                <tr>
+                    <td><h1 id="occupancy"></h1></td>
+                    <td><h4 id="BUS_total">/17</h4></td>
+                </tr>
+            </table>
+        </div> -->
+
+        <div id="BUS_occupancy_block">
+            <h1 id="occupancy"></h1> <h4 id="BUS_total">/17</h4>
+        </div>
+
+
+            <img class="occupancy_img" src="style/SIGNALS/YES_ENTRY.jpg" alt="Space Available">
+
+            <!-- <img class="occupancy_img" src="style/SIGNALS/NO_entry.png" alt="At Full Capacity"> -->
+            
+
+            <div id="logo">
+                <h3>Powered by</h3> 
+                <img src="style/LOGO/Gradient Logo on Transparent/default.png " width="50%" style="padding-left: 50px;"> 
+            </div>
+    </div>
+
+
+
+
+
+    <div id="main-footer">
+        <p>Copyright &copy; March 2021 Occulus</p>
+    </div>
+
+</body>
+
+<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js">
+</script>
+<script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-database.js">
+</script>
+
+
+<script>
+    // web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyC4GwvttlxOfCIylPtppPzLzCebfwkDYhE",
+        authDomain: "countus-c2321.firebaseapp.com",
+        databaseURL: "https://countus-c2321-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "countus-c2321",
+        storageBucket: "countus-c2321.appspot.com",
+        messagingSenderId: "888497547358",
+        appId: "1:888497547358:web:f7a0aeb658e9b5336e6ccf"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    var database = firebase.database();
+
+    firebase.database().ref('/people_count').on("value",(snapshot) => {
+    var count = (snapshot.val() && snapshot.val().count) || 'Empty';
+    document.getElementById("occupancy").innerHTML=count
+    });
+</script>
+
+
+</html>
