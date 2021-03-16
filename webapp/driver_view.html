@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Occulus - DriverView</title>
     <link rel="stylesheet" href="style/driver_style.css" />
+    <link rel="apple-touch-icon" href="style/ICONS/HOME_PAGE_ICON.png">
   </head>
 
 
@@ -34,9 +35,9 @@
     <div class="bottom_container">
        <div id="bottom_box">
         <h1 class="number-input"> Maximum Occupancy : 
-          <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
-          <input class="quantity" min="0" name="quantity" value="17" type="number">
-          <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+          <button onclick="this.parentNode.querySelector('input[type=number]').stepDown();checkStatus()" class="minus"></button>
+          <input id="capacity" class="quantity" min="0" name="quantity" value="1" type="number">
+          <button onclick="this.parentNode.querySelector('input[type=number]').stepUp();checkStatus()" class="plus"></button>
         </h1>
 
 
@@ -95,9 +96,21 @@
 firebase.database().ref('/people_count').on("value",(snapshot) => {
 var count = (snapshot.val() && snapshot.val().count) || 'Empty';
 document.getElementById("occupancy").innerHTML=count
+
+checkStatus();
 });
 
-
+const checkStatus = () => {
+  if (parseInt(document.getElementById("occupancy").innerHTML) >= parseInt(document.getElementById("capacity").value)) {
+  document.getElementById(
+    "inner_box"
+  ).classList.add("red");
+} else {
+  document.getElementById(
+    "inner_box"
+  ).classList.remove("red");
+}
+}
 
 </script>
 

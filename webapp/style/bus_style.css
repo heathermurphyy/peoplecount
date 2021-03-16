@@ -10,7 +10,7 @@ body{
 }
 
 .occupancy_img{
-    display: block;
+    display: none;
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 30px;

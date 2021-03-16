@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/bus_style.css">
+    <link rel="apple-touch-icon" href="style/ICONS/HOME_PAGE_ICON.png">
     <title>Occulus - BusView</title>
 
 </head>
@@ -26,13 +27,13 @@
         </div> -->
 
         <div id="BUS_occupancy_block">
-            <h1 id="occupancy"></h1> <h4 id="BUS_total">/17</h4>
+            <h1 id="occupancy"></h1> <h4>/<span id="BUS_total">17</span></h4>
         </div>
 
 
-            <img class="occupancy_img" src="style/SIGNALS/YES_ENTRY.jpg" alt="Space Available">
+            <img id="entry" class="occupancy_img" src="style/SIGNALS/YES_ENTRY.jpg" alt="Space Available">
 
-            <!-- <img class="occupancy_img" src="style/SIGNALS/NO_entry.png" alt="At Full Capacity"> -->
+            <img id="no_entry" class="occupancy_img" src="style/SIGNALS/NO_entry.png" alt="At Full Capacity">
             
 
             <div id="logo">
@@ -129,8 +130,27 @@
 
     firebase.database().ref('/people_count').on("value",(snapshot) => {
     var count = (snapshot.val() && snapshot.val().count) || 'Empty';
-    document.getElementById("occupancy").innerHTML=count
+    document.getElementById("occupancy").innerHTML=count;
+    checkStatus();
     });
+
+    const checkStatus = () => {
+        if (parseInt(document.getElementById("occupancy").innerHTML) >= parseInt(document.getElementById("BUS_total").innerHTML)) {
+            document.getElementById(
+                "entry"
+            ).style.display = 'none';
+            document.getElementById(
+                "no_entry"
+            ).style.display = 'block';
+        } else {
+            document.getElementById(
+                "entry"
+            ).style.display = 'block';
+            document.getElementById(
+                "no_entry"
+            ).style.display = 'none';
+        }
+    }
 </script>
 
 
