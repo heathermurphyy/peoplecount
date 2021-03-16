@@ -1,3 +1,4 @@
+
 body{
     margin: 5% 5% 0% 5%;
 }
@@ -82,3 +83,109 @@ body{
 
 
 
+
+
+
+
+
+
+/* ATTEMPTED RESPONSIVE VERSION */
+/* body{
+    margin: 5% 5% 0% 5%;
+    height: 100vh;
+}
+
+
+ #bus_front_header{
+    height: 15%;
+    margin: 0%;
+    padding: 0%;
+
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    /* font-size: 200px; */
+    /* font-stretch: wider;
+
+    display: flex;
+    align-items:center;
+    flex-direction: row ;   
+}
+
+#bus_num{
+    margin: 0%;
+    font-size: 20vw;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.icon{
+    justify-content: left;
+    width: 20%;
+}
+
+
+
+
+
+#BUS_occupancy_block{
+    height:15%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    vertical-align: center;
+    padding: 0%;
+}
+#occupancy{
+    padding: 0%;
+    vertical-align: center;
+    margin: 0%;
+    font-size: 20vw;
+}
+#BUS_total{
+    margin: 0%;
+    font-size: 4vw;
+    padding-top: 10%;
+}
+
+
+
+#image_div{
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+
+
+.occupancy_img{
+    width: 70%;
+ }
+
+
+
+#logo{
+    margin: 0%;
+    padding: 0%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;  
+}
+
+#end_logo{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#main-footer{
+    margin: 0%;
+    background: rgba(151, 170, 189, 0.746);
+    color: rgba(0, 0, 0, 0.568);
+    text-align: center;
+    padding: 0%;
+  
+}
+
+ */
+
+ 

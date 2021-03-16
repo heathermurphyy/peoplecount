@@ -12,7 +12,9 @@ html,body{
     /* align-content: center;
     vertical-align: center; */
     /* justify-content: center; */ 
-    background-image: linear-gradient(rgb(2, 24, 2), rgb(96, 219, 204));
+    /* background-image: linear-gradient(rgb(2, 24, 2), rgb(96, 219, 204)); */
+    background-image: linear-gradient(rgb(26, 39, 26), rgb(96, 219, 204));
+    /* rgb(23, 54, 51)); */
 }
 
 #logo_div{
@@ -234,6 +236,7 @@ table{
   /* border: 2px solid currentColor; */
   border-radius: 2rem;
   color: black;
+  background:#ffffff;
   font-family: roboto;
   font-size: 2rem;
   font-weight: 100;
