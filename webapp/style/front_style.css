@@ -1,12 +1,14 @@
 html,body{
-    height: 100%;
-    margin: 0;
+    height: 100vh;
+    width: 100%;
+    margin:0%;
 }
 
 .container{
-    height: 100%;
+    width: 100%;
+    height: 100vh;
     padding: 5%;
-    display: block;
+    /* display: block; */
     /* align-content: center;
     vertical-align: center; */
     /* justify-content: center; */ 
@@ -15,11 +17,13 @@ html,body{
 
 #logo_div{
     display: flex;
-    background-color: whitesmoke;
+    /* background-color: whitesmoke; */
     width: 100%;
     height: 40%;
-    margin-bottom:  5%;
+    /* margin-bottom:  5%;
+    margin-left: 10%; */
     align-content: center;
+    text-align: center;
     vertical-align: center;
 }
 
