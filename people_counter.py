@@ -21,6 +21,7 @@ import time
 import dlib
 import cv2
 import firebase_admin
+import threading
 from firebase_admin import credentials
 from firebase_admin import db
 
@@ -241,7 +242,8 @@ while True:
 					to.counted = True
 
 				people = totalDown - totalUp
-				updateCount (people)				
+				thread = threading.Thread(target=updateCount, args=(people,))
+				thread.start()			
 
 		# store the trackable object in our dictionary
 		trackableObjects[objectID] = to
